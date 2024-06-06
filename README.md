@@ -43,5 +43,9 @@
       "Payload": {"order" : {"item_id": "Dummy02", "unit": 20}}
     }
     ```
-
-
+    
+4. 環境をクリアする場合は、下記を実行します。
+   
+    ```
+    sam delete --no-prompts
+    ```
