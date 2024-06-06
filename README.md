@@ -22,13 +22,14 @@
    ```
    
 3. AWS マネジメントコンソールで、AWS Step Functions コンソールに移動し、`circuitbreaker-statemachine` を開いて実行します。 入力として下記を使用します。
+    - (**<AWS_REGION>** の部分は使用している AWS リージョンの IDに置き換えてください。 例: 東京リージョンなら `ap-northeast-1`）
     - (**<AWS_ACCOUNT>** の部分は使用している AWS アカウントの 12 桁の数字に置き換えてください）
 
     - サーキットブレーカーが CLOSE 状態のサービスの呼び出し: (正常に終了）
 
     ```json
     {
-      "TargetLambda": "arn:aws:lambda:ap-northeast-1:<AWS_ACCOUNT>:function:circuitbreaker-Payment",
+      "TargetLambda": "arn:aws:lambda:<AWS_REGION>:<AWS_ACCOUNT>:function:circuitbreaker-Payment",
       "Payload": {"order" : {"item_id": "Dummy01", "unit": 10}}
     }
     ```
@@ -38,7 +39,7 @@
 
     ```json
     {
-      "TargetLambda": "arn:aws:lambda:ap-northeast-1:<AWS_ACCOUNT>:function:circuitbreaker-PaymentTimeout",
+      "TargetLambda": "arn:aws:lambda:<AWS_REGION>:<AWS_ACCOUNT>:function:circuitbreaker-PaymentTimeout",
       "Payload": {"order" : {"item_id": "Dummy02", "unit": 20}}
     }
     ```
