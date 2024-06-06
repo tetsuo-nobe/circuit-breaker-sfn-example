@@ -21,4 +21,26 @@
    sam deploy --guided
    ```
    
+3. AWS マネジメントコンソールで、AWS Step Functions コンソールに移動し、`circuitbreaker-statemachine` を開いて実行します。 入力として下記を使用します。
+    - (<AWS_ACCOUNT> の部分は使用している AWS アカウントの 12 桁の数字に置き換えてください）
+
+    - サーキットブレーカーが CLOSE 状態のサービスの呼び出し: (正常に終了）
+
+    ```json
+    {
+      "TargetLambda": "arn:aws:lambda:ap-northeast-1:330174381929:function:circuitbreaker-Payment",
+      "Payload": {"order" : {"item_id": "Dummy01", "unit": 10}}
+    }
+    ```
+
+    - サーキットブレーカーが OPEN 状態 になるサービスの呼び出し: (エラーで終了）
+    - 20秒以内に再実行してもサーキットブレーカーは OPEN のままなので、サービス呼び出しを行わずエラーで終了させています。
+
+    ```json
+    {
+      "TargetLambda": "arn:aws:lambda:ap-northeast-1:330174381929:function:circuitbreaker-PaymentTimeout",
+      "Payload": {"order" : {"item_id": "Dummy02", "unit": 20}}
+    }
+    ```
+
 
